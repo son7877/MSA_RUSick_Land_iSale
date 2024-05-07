@@ -4,7 +4,7 @@ import com.example.iSale.global.domain.entity.ISale;
 import java.util.Date;
 
 public record ISaleRequest(
-    Date iSale_in,
+    String iSale_in,
     Long iSale_sell_price,
     Integer iSale_category,
     String iSale_name,

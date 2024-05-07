@@ -1,12 +1,9 @@
 package com.example.iSale.global.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +21,7 @@ public class ISale {
     private UUID iSale_id;
 
     @Column(name = "ISALE_IN") // 입주 가능일
-    private Date iSale_in;
+    private String iSale_in;
 
     @Column(name = "ISALE_SELL_PRICE") // 분양가
     private Long iSale_sell_price;
@@ -40,5 +37,8 @@ public class ISale {
 
     @Column(name = "ISALE_ADDRESS")
     private String iSale_address;
+
+    @OneToMany(mappedBy = "isale", cascade = CascadeType.REMOVE)
+    private List<InterestISale> interestISales;
 
 }
