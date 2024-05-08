@@ -38,16 +38,23 @@ public class ISaleServiceImpl implements ISaleService{
     }
 
     @Override
-    public List<InterestISale> getInterestById(String id) {
-//        Optional<InterestISale> byId =  interestISaleRepository.findById(UUID.fromString(id));
-//        Optional<InterestISale> interestISales = interestISaleRepository.findById(UUID.fromString(id));
-//        return interestISales.orElseThrow(() -> new IllegalArgumentException("즐겨찾기 정보 없음"));
-        Optional<InterestISale> byId = interestISaleRepository.findAllById(UUID.fromString(id));
-        return byId.orElseThrow(() -> new IllegalArgumentException("즐겨찾기 정보 없음"));
+    public List<InterestISale> getInterestById(UUID id) {
+        Optional<InterestISale> byId = interestISaleRepository.findAllById(id);
+        if(byId.isEmpty()) throw new IllegalArgumentException("리스트 없음");
+        return byId.get().getIsale().getInterestISales();
     }
 
     @Override
-    public void addOrDeleteInterest(InterestISaleRequest interestISaleRequest) {
-        Optional<InterestISale> interest = InterestISaleRepository.findById(interestISaleRequest.)
+    public void addOrDeleteInterest(InterestISaleRequest request) {
+        //DB에 저장되어있는 Interest 테이블의 iSale의 ID 가져오기
+//        Optional<InterestISale> interest = interestISaleRepository.findByIsale(request.isale());
+        InterestISale entity = request.toEntity();
+        Optional<InterestISale> byIsale = interestISaleRepository.findByIsaleAndUserId(entity.getIsale(),entity.getUserId());
+        //ByIsale 유무 확인
+        //ID가 있다면 삭제
+        if(byIsale.isPresent()) interestISaleRepository.delete(byIsale.get());
+        //ID가 없다면 추가
+//        interest.ifPresent(interestISaleRepository::delete);
+        else interestISaleRepository.save(entity);
     }
 }

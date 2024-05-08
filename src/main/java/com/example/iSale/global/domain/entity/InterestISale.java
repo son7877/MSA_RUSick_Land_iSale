@@ -6,20 +6,21 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Table(name = "INTEREST_ISALE")
 @Entity @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class InterestISale {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "INTEREST_ISALE_ID")
-    private Long id;
+    private UUID id;
 
     @Column(name = "USER_ID", nullable = false)
-    private Long userId;
+    private UUID userId;
 
     @ManyToOne
     @JoinColumn(name = "ISALE_ID", nullable = false)

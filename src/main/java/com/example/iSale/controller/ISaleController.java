@@ -6,6 +6,8 @@ import com.example.iSale.global.domain.entity.ISale;
 import com.example.iSale.global.domain.entity.InterestISale;
 import com.example.iSale.service.ISaleService;
 import java.util.List;
+import java.util.UUID;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,14 +33,17 @@ public class ISaleController {
     }
 
     //관심 분양
+
+    //관심 분양 리스트 출력
     @GetMapping("/interest")
-    public InterestISale getInterestISale(@RequestParam String id){
+    public List<InterestISale> getInterestISale(@RequestParam UUID id){
         return iSaleService.getInterestById(id);
     }
 
+    //관심 분양 추가, 추가돼있다면 삭제 작업
     @PostMapping("/interest")
-    public void addOrDeleteInterest(@RequestBody InterestISaleRequest interestISaleRequest){
-        return iSaleService.
+    public void addOrDeleteInterest(@RequestBody InterestISaleRequest request){
+        iSaleService.addOrDeleteInterest(request);
     }
 
 }
