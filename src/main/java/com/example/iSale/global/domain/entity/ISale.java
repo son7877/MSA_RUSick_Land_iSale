@@ -1,12 +1,9 @@
 package com.example.iSale.global.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,10 +11,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table
 @Getter @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "ISALE")
 public class ISale {
     @Id @GeneratedValue
     @Column(name = "ISALE_ID") // 분양 id
@@ -40,5 +37,8 @@ public class ISale {
 
     @Column(name = "ISALE_ADDRESS")
     private String iSaleAddress;
+
+    @OneToMany(mappedBy = "isale", cascade = CascadeType.REMOVE)
+    private List<InterestISale> interestISales;
 
 }
