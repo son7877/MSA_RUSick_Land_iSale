@@ -1,8 +1,7 @@
-package com.example.iSale.global.domain.entity;
+package com.example.iSale.domain.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;

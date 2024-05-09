@@ -1,7 +1,7 @@
 package com.example.iSale.dto.request;
 
-import com.example.iSale.global.domain.entity.ISale;
-import com.example.iSale.global.domain.entity.InterestISale;
+import com.example.iSale.domain.entity.ISale;
+import com.example.iSale.domain.entity.InterestISale;
 
 import java.util.UUID;
 

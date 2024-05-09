@@ -3,20 +3,18 @@ package com.example.iSale.service;
 import com.example.iSale.dto.request.ISaleEnrollRequest;
 import com.example.iSale.dto.request.ISaleRequest;
 import com.example.iSale.dto.request.InterestISaleRequest;
-import com.example.iSale.global.domain.entity.ISale;
-import com.example.iSale.global.domain.entity.ISaleEnroll;
-import com.example.iSale.global.domain.repository.ISaleEnrollRepository;
-import com.example.iSale.global.domain.entity.InterestISale;
-import com.example.iSale.global.domain.repository.ISaleRepository;
+import com.example.iSale.domain.entity.ISale;
+import com.example.iSale.domain.entity.ISaleEnroll;
+import com.example.iSale.domain.repository.ISaleEnrollRepository;
+import com.example.iSale.domain.entity.InterestISale;
+import com.example.iSale.domain.repository.ISaleRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.example.iSale.global.domain.repository.InterestISaleRepository;
+import com.example.iSale.domain.repository.InterestISaleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import javax.swing.text.html.Option;
 
 @Service
 @RequiredArgsConstructor

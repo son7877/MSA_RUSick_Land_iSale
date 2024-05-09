@@ -1,7 +1,6 @@
 package com.example.iSale.dto.request;
 
-import com.example.iSale.global.domain.entity.ISale;
-import java.util.Date;
+import com.example.iSale.domain.entity.ISale;
 
 public record ISaleRequest(
     String iSaleIn,
