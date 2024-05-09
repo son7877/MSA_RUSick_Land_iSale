@@ -1,7 +1,7 @@
 package com.example.iSale;
 
-import com.example.iSale.global.domain.entity.ISaleEnroll;
-import com.example.iSale.global.domain.repository.ISaleEnrollRepository;
+import com.example.iSale.domain.entity.ISaleEnroll;
+import com.example.iSale.domain.repository.ISaleEnrollRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;

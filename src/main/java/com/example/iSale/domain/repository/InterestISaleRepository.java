@@ -1,7 +1,7 @@
-package com.example.iSale.global.domain.repository;
+package com.example.iSale.domain.repository;
 
-import com.example.iSale.global.domain.entity.ISale;
-import com.example.iSale.global.domain.entity.InterestISale;
+import com.example.iSale.domain.entity.InterestISale;
+import com.example.iSale.domain.entity.ISale;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

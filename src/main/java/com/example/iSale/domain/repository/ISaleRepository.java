@@ -1,6 +1,6 @@
-package com.example.iSale.global.domain.repository;
+package com.example.iSale.domain.repository;
 
-import com.example.iSale.global.domain.entity.ISale;
+import com.example.iSale.domain.entity.ISale;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 
