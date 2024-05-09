@@ -1,5 +1,6 @@
 package com.example.iSale.service;
 
+import com.example.iSale.dto.request.ISaleEnrollRequest;
 import com.example.iSale.dto.request.ISaleRequest;
 import com.example.iSale.dto.request.InterestISaleRequest;
 import com.example.iSale.global.domain.entity.ISale;
@@ -12,6 +13,7 @@ public interface ISaleService {
     void save(ISaleRequest req);
     ISale getISaleById(String id);
     List<ISale> getAllISale();
+    void enrollSave(String id, ISaleEnrollRequest req);
     List<InterestISale> getInterestById(UUID Id);
     void addOrDeleteInterest(InterestISaleRequest request);
 }

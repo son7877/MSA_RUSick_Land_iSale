@@ -1,5 +1,6 @@
 package com.example.iSale.controller;
 
+import com.example.iSale.dto.request.ISaleEnrollRequest;
 import com.example.iSale.dto.request.ISaleRequest;
 import com.example.iSale.dto.request.InterestISaleRequest;
 import com.example.iSale.global.domain.entity.ISale;
@@ -32,6 +33,11 @@ public class ISaleController {
         return iSaleService.getISaleById(id);
     }
 
+    // 분양 신청
+    @PostMapping("{id}/enroll")
+    public void enrollISale(@PathVariable String id, @RequestBody ISaleEnrollRequest req){
+        iSaleService.enrollSave(id, req);
+    }
     //관심 분양
 
     //관심 분양 리스트 출력
