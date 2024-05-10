@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table
+@Table(name = "ISALE")
 @Getter @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -40,4 +40,6 @@ public class ISale {
     @OneToMany(mappedBy = "isale", cascade = CascadeType.REMOVE)
     private List<InterestISale> interestISales;
 
+    @OneToMany(mappedBy = "iSale", cascade = CascadeType.REMOVE)
+    private List<ISaleEnroll> iSaleEnrolls;
 }
