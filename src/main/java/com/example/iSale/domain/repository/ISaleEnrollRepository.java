@@ -8,5 +8,5 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ISaleEnrollRepository extends JpaRepository<ISaleEnroll, UUID> {
-    List<ISaleEnroll> findByQualTFIsNull();
+    List<ISaleEnroll> findAllByQualTFIsNull();
 }
