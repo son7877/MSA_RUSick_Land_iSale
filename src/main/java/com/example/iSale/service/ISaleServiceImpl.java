@@ -11,6 +11,8 @@ import com.example.iSale.domain.repository.ISaleRepository;
 import com.example.iSale.dto.response.ISaleDetailResponse;
 import com.example.iSale.dto.response.ISaleResponse;
 import com.example.iSale.dto.response.InterestISaleResponse;
+import com.example.iSale.exception.ISaleErrorCode;
+import com.example.iSale.exception.ISaleException;
 import com.example.iSale.global.utils.TokenInfo;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,9 +22,6 @@ import java.util.UUID;
 
 import com.example.iSale.domain.repository.InterestISaleRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -40,7 +39,7 @@ public class ISaleServiceImpl implements ISaleService {
     @Override
     public ISaleDetailResponse getISaleById(String id) {
         Optional<ISale> byId = iSaleRepository.findById(UUID.fromString(id));
-        ISale iSale = byId.orElseThrow(() -> new IllegalArgumentException("분양 정보 없음"));
+        ISale iSale = byId.orElseThrow(() -> new ISaleException(ISaleErrorCode.ISaleIdNotFound));
 
         return ISaleDetailResponse.from(iSale);
     }
@@ -56,7 +55,7 @@ public class ISaleServiceImpl implements ISaleService {
     @Override
     public void enrollSave(String id, TokenInfo tokenInfo, ISaleEnrollRequest req) {
         Optional<ISale> byId = iSaleRepository.findById(UUID.fromString(id));
-        ISale iSale = byId.orElseThrow(() -> new IllegalArgumentException(""));
+        ISale iSale = byId.orElseThrow(() -> new ISaleException(ISaleErrorCode.ISaleIdNotFound));
         int age = LocalDateTime.now().getYear() - tokenInfo.birthDay().getYear();
         ISaleEnroll iSaleEnroll = ISaleEnroll.builder()
             .iSale(iSale)
@@ -76,7 +75,7 @@ public class ISaleServiceImpl implements ISaleService {
 
         List<InterestISaleResponse> interestISaleResponseList = new ArrayList<>();
 
-        if(interestISaleList.isEmpty()) throw new IllegalArgumentException("리스트 없음");
+        if(interestISaleList.isEmpty()) throw new ISaleException(ISaleErrorCode.ListEmpty);
 
         for (InterestISale interestISale : interestISaleList) {
             interestISaleResponseList.add(InterestISaleResponse.from(interestISale));
@@ -104,7 +103,7 @@ public class ISaleServiceImpl implements ISaleService {
     @Override
     public void addOrDeleteInterest(InterestISaleRequest req/*, String id, TokenInfo tokenInfo*/) {
         Optional<ISale> byId = iSaleRepository.findById(req.iSaleId());
-        ISale isale = byId.orElseThrow(() -> new IllegalArgumentException("뭔가 잘못됨"));
+        ISale isale = byId.orElseThrow(() -> new ISaleException(ISaleErrorCode.ISaleIdNotFound));
 
         InterestISale byIsale =
             interestISaleRepository.findByIsaleAndUserId(isale, UUID.fromString(req.tokenInfo().id()));
