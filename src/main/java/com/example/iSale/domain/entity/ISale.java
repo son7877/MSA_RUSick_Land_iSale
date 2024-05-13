@@ -1,8 +1,7 @@
-package com.example.iSale.global.domain.entity;
+package com.example.iSale.domain.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -11,7 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table
+@Table(name = "ISALE")
 @Getter @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -41,4 +40,6 @@ public class ISale {
     @OneToMany(mappedBy = "isale", cascade = CascadeType.REMOVE)
     private List<InterestISale> interestISales;
 
+    @OneToMany(mappedBy = "iSale", cascade = CascadeType.REMOVE)
+    private List<ISaleEnroll> iSaleEnrolls;
 }

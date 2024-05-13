@@ -1,10 +1,10 @@
 package com.example.iSale.service;
 
 import com.example.iSale.dto.request.InterestISaleRequest;
-import com.example.iSale.global.domain.entity.ISale;
-import com.example.iSale.global.domain.entity.InterestISale;
-import com.example.iSale.global.domain.repository.ISaleRepository;
-import com.example.iSale.global.domain.repository.InterestISaleRepository;
+import com.example.iSale.domain.entity.ISale;
+import com.example.iSale.domain.entity.InterestISale;
+import com.example.iSale.domain.repository.ISaleRepository;
+import com.example.iSale.domain.repository.InterestISaleRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
