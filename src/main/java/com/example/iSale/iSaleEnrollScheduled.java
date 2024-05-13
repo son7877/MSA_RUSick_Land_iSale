@@ -1,9 +1,19 @@
 package com.example.iSale;
 
+import com.example.iSale.api.ApiLand;
 import com.example.iSale.domain.entity.ISaleEnroll;
 import com.example.iSale.domain.repository.ISaleEnrollRepository;
+import com.example.iSale.dto.response.ISaleFromLandResponse;
+import com.example.iSale.global.utils.TokenInfo;
 import jakarta.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -12,16 +22,27 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Transactional
 public class iSaleEnrollScheduled {
-
+    private final ApiLand apiLand;
     private final ISaleEnrollRepository iSaleEnrollRepository;
 
     @Scheduled(cron = "0 */5 * * * *")
     public void iSaleEnrollQualification() {
+
+        Set<UUID> idList = new HashSet<>();
         List<ISaleEnroll> byQualTfIsNull = iSaleEnrollRepository.findAllByQualTFIsNull();
 
         for(ISaleEnroll iSaleEnroll : byQualTfIsNull) {
+            idList.add(iSaleEnroll.getUserId());
+        }
+        // Map<UUID, Integer> allLandsByUserId = apiLand.getAllObjectsByUserId(idList);
+        apiLand.getAllObjectsByUserId(idList);
+
+        System.out.println(ApiLand.map);
+
+
+        for(ISaleEnroll iSaleEnroll : byQualTfIsNull) {
             System.out.println(iSaleEnroll.getAge());
-            int score = 25;
+            int score = 0;
 
             // 나이에 따른 자격 점수 부여
             if(iSaleEnroll.getAge() < 19){
@@ -57,10 +78,13 @@ public class iSaleEnrollScheduled {
             }
 
             // 매물 여부에 따른 자격 점수 부여
-            // todo 코드 작성
+            // if(allLandsByUserId.get(iSaleEnroll.getUserId()) == null){
+            //     score += 25;
+            // }
+
             System.out.println(score);
             // score 점수 75점 초과일 경우 true 부여
-            iSaleEnroll.setQualTF(score > 75);
+            // iSaleEnroll.setQualTF(score > 75);
         }
     }
 }
