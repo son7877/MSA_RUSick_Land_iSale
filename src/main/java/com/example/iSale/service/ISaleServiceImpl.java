@@ -57,6 +57,13 @@ public class ISaleServiceImpl implements ISaleService {
         Optional<ISale> byId = iSaleRepository.findById(UUID.fromString(id));
         ISale iSale = byId.orElseThrow(() -> new ISaleException(ISaleErrorCode.ISaleIdNotFound));
         int age = LocalDateTime.now().getYear() - tokenInfo.birthDay().getYear();
+        Optional<ISaleEnroll> enroll = iSaleEnrollRepository.findById(UUID.fromString(tokenInfo.id()));
+
+        if (enroll.isPresent()) {
+            if(enroll.get().getQualTF())
+               throw new IllegalArgumentException("이미 분양 신청 상태입니다.");
+        }
+
         ISaleEnroll iSaleEnroll = ISaleEnroll.builder()
             .iSale(iSale)
             .userId(UUID.fromString(tokenInfo.id())) // todo token 까서 id값 넣기
