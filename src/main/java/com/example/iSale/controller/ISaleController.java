@@ -44,6 +44,7 @@ public class ISaleController {
     @PostMapping("{id}/enroll")
     public void enrollISale(@PathVariable String id, @RequestBody ISaleEnrollRequest req
                     , @AuthenticationPrincipal TokenInfo tokenInfo){
+
         iSaleService.enrollSave(id, tokenInfo, req);
     }
 

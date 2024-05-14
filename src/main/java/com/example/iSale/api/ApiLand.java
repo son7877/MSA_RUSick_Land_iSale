@@ -15,11 +15,11 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class ApiLand {
-    public FeignLand feignLand;
+    public final FeignLand feignLand;
     public static Map<UUID, Long> map = new HashMap<>();
 
     @Async
-    public void getAllObjectsByUserId(Set<UUID> userId) {
+    public void getAllObjectsByUserId(List<UUID> userId) {
         map = feignLand.getLandsByUserId(userId);
     }
 }

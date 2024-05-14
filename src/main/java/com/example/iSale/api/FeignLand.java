@@ -9,10 +9,12 @@ import java.util.Set;
 import java.util.UUID;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient("LAND")
+@FeignClient(value = "LAND", path = "/api/v1/lands")
 public interface FeignLand {
 
-    @GetMapping("/api/v1/lands/owner/landCount")
-    Map<UUID, Long> getLandsByUserId(Set<UUID> userId);
+    @PostMapping("owner/landCount")
+    Map<UUID, Long> getLandsByUserId(@RequestBody List<UUID> userId);
 }

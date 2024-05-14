@@ -13,7 +13,7 @@ public record TokenInfo(
     public static TokenInfo fromClaims(Claims claims){
         String id = claims.get("id", String.class);
         String nickname = claims.get("nickname", String.class);
-        LocalDate birthDay = LocalDate.parse(claims.get("birthday", String.class));
+        LocalDate birthDay = LocalDate.parse(claims.get("birthDay", String.class));
         return new TokenInfo(id, nickname, birthDay);
     }
 
