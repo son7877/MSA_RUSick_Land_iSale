@@ -21,4 +21,5 @@ public interface ISaleService {
     List<InterestISaleResponse> getInterestById(TokenInfo tokenInfo/*, UUID Id*/);
     // void addOrDeleteInterest(InterestISaleRequest request);
     void addOrDeleteInterest(InterestISaleRequest req);
+    Boolean getInterest(String iSaleId, TokenInfo tokenInfo);
 }
