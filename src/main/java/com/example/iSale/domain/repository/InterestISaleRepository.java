@@ -9,8 +9,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface InterestISaleRepository extends JpaRepository<InterestISale, UUID> {
-List<InterestISale> findAllByUserId(UUID userId/*UUID id*/);
-// Optional<InterestISale> findByIsaleAndUserId(ISale iSale, UUID id);
-InterestISale findByIsaleAndUserId(ISale iSale, UUID userId);
+    List<InterestISale> findAllByUserId(UUID userId/*UUID id*/);
+    // Optional<InterestISale> findByIsaleAndUserId(ISale iSale, UUID id);
+    InterestISale findByIsaleAndUserId(ISale iSale, UUID userId);
 
+    // void findByIsaleAndUserId(ISale iSale, UUID id);
 }

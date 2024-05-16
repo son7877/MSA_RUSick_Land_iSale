@@ -57,11 +57,11 @@ public class ISaleServiceImpl implements ISaleService {
         Optional<ISale> byId = iSaleRepository.findById(UUID.fromString(id));
         ISale iSale = byId.orElseThrow(() -> new ISaleException(ISaleErrorCode.ISaleIdNotFound));
         int age = LocalDateTime.now().getYear() - tokenInfo.birthDay().getYear();
-        Optional<ISaleEnroll> enroll = iSaleEnrollRepository.findById(UUID.fromString(tokenInfo.id()));
+        Optional<ISaleEnroll> enroll = iSaleEnrollRepository.findByUserId(UUID.fromString(tokenInfo.id()));
 
         if (enroll.isPresent()) {
-            if(enroll.get().getQualTF())
-               throw new IllegalArgumentException("이미 분양 신청 상태입니다.");
+            if(enroll.get().getQualTF() == null || enroll.get().getQualTF())
+                throw new IllegalArgumentException("이미 분양 신청 상태입니다.");
         }
 
         ISaleEnroll iSaleEnroll = ISaleEnroll.builder()
@@ -119,5 +119,15 @@ public class ISaleServiceImpl implements ISaleService {
         } else {
             interestISaleRepository.save(req.toEntity());
         }
+    }
+
+    @Override
+    public Boolean getInterest(String iSaleId, TokenInfo tokenInfo) {
+        Optional<ISale> byId = iSaleRepository.findById(UUID.fromString(iSaleId));
+        ISale iSale = byId.orElseThrow(() -> new ISaleException(ISaleErrorCode.ISaleIdNotFound));
+        InterestISale byIsaleAndUserId = interestISaleRepository.findByIsaleAndUserId(iSale,
+            UUID.fromString(tokenInfo.id()));
+
+        return byIsaleAndUserId != null;
     }
 }
