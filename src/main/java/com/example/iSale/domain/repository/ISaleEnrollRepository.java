@@ -9,4 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ISaleEnrollRepository extends JpaRepository<ISaleEnroll, UUID> {
     List<ISaleEnroll> findAllByQualTFIsNull();
+
+    Optional<ISaleEnroll> findByUserId(UUID uuid);
 }

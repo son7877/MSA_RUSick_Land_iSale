@@ -44,7 +44,6 @@ public class ISaleController {
     @PostMapping("{id}/enroll")
     public void enrollISale(@PathVariable String id, @RequestBody ISaleEnrollRequest req
                     , @AuthenticationPrincipal TokenInfo tokenInfo){
-
         iSaleService.enrollSave(id, tokenInfo, req);
     }
 
@@ -61,6 +60,11 @@ public class ISaleController {
     // public void addOrDeleteInterest(@RequestBody InterestISaleRequest request){
     //     iSaleService.addOrDeleteInterest(request);
     // }
+    @GetMapping("{iSaleId}/interest")
+    public Boolean getInterest(@PathVariable("iSaleId") String iSaleId, @AuthenticationPrincipal TokenInfo tokenInfo){
+        return iSaleService.getInterest(iSaleId, tokenInfo);
+    }
+
 
     @PostMapping("{id}/interest")
     public void addOrDeleteInterest(@PathVariable String id, @AuthenticationPrincipal TokenInfo tokenInfo){

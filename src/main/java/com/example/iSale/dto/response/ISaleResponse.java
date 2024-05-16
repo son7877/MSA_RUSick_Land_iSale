@@ -5,12 +5,14 @@ import java.util.UUID;
 
 public record ISaleResponse(
     UUID id,
-    String iSaleName
+    String iSaleName,
+    String iSaleAddress
 ) {
     public static ISaleResponse from(ISale iSale){
         return new ISaleResponse(
             iSale.getISaleId(),
-            iSale.getISaleName()
+            iSale.getISaleName(),
+            iSale.getISaleAddress()
         );
     }
 }
